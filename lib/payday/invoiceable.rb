@@ -28,7 +28,7 @@ module Payday::Invoiceable
     if defined?(tax_rate)
       calculated = subtotal * tax_rate
       return 0 if calculated < 0
-      calculated
+      calculated.round(2)
     else
       0
     end
