@@ -45,9 +45,9 @@ module Payday
 
       if stamp
         pdf.bounding_box([150, pdf.cursor - 50], width: pdf.bounds.width - 300) do
-          pdf.font("Helvetica-Bold") do
-            pdf.fill_color "cc0000"
-            pdf.text stamp, align: :center, size: 25, rotate: 15
+          pdf.font("Helvetica") do
+            pdf.fill_color "000000"
+            pdf.text "Tax Invoice", align: :center, size: 20, rotate: 0
           end
         end
       end
