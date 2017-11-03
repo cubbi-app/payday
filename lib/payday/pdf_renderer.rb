@@ -78,7 +78,7 @@ module Payday
 
       # render the company details
       table_data = []
-      table_data << [bold_cell(pdf, invoice_or_default(invoice, :company_name).strip, size: 12)]
+      table_data << [bold_cell(pdf, invoice_or_default(invoice, :company_name).strip, size: 10)]
 
       invoice_or_default(invoice, :company_details).lines.each { |line| table_data << [line] }
 
@@ -96,7 +96,7 @@ module Payday
 
       # render bill to
       pdf.float do
-        table = pdf.table([[bold_cell(pdf, I18n.t("payday.invoice.bill_to", default: "Bill To"))],
+        table = pdf.table([[bold_cell(pdf, I18n.t("payday.invoice.bill_to", default: "Customer"))],
                            [invoice.bill_to]], column_widths: [200], cell_style: bill_to_cell_style)
         bill_to_ship_to_bottom = pdf.cursor
       end
@@ -217,14 +217,14 @@ module Payday
 
     def self.totals_lines(invoice, pdf)
       table_data = []
-      table_data << [
-        bold_cell(pdf, I18n.t("payday.invoice.subtotal", default: "Subtotal:")),
-        cell(pdf, number_to_currency(invoice.subtotal, invoice), align: :right)
-      ]
+#       table_data << [
+#         bold_cell(pdf, I18n.t("payday.invoice.subtotal", default: "Subtotal:")),
+#         cell(pdf, number_to_currency(invoice.subtotal, invoice), align: :right)
+#       ]
 
       if invoice.tax_rate > 0
         if invoice.tax_description.nil?
-          tax_description = I18n.t("payday.invoice.tax", default: "Tax:")
+          tax_description = I18n.t("payday.invoice.tax", default: "INCLUDES GST 10%:")
         else
           tax_description = invoice.tax_description
         end
